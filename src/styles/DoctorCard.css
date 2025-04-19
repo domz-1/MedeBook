@@ -1,0 +1,194 @@
+.doctor-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.doctor-card.expanded {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.doctor-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.doctor-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.doctor-card:hover .doctor-image img {
+  transform: scale(1.05);
+}
+
+.availability-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--primary-color);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.doctor-info {
+  padding: 1.5rem;
+}
+
+.doctor-info h3 {
+  margin: 0 0 0.5rem;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+.specialty {
+  color: var(--text-secondary);
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+}
+
+.rating {
+  margin-bottom: 0.75rem;
+}
+
+.star {
+  color: var(--star-color);
+  margin-right: 2px;
+}
+
+.star.filled {
+  color: var(--star-filled-color);
+}
+
+.location {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.doctor-details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.doctor-details.show {
+  max-height: 500px;
+  opacity: 1;
+  margin: 1rem 0;
+}
+
+.doctor-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.doctor-languages {
+  margin-bottom: 1rem;
+}
+
+.languages-label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.language-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.language-tag {
+  background: var(--tag-bg);
+  color: var(--text-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.doctor-bio {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.card-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.details-button,
+.book-button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.details-button {
+  background: var(--button-secondary-bg);
+  color: var(--text-primary);
+}
+
+.details-button:hover {
+  background: var(--button-secondary-hover);
+}
+
+.book-button {
+  background: var(--primary-color);
+  color: white;
+  flex: 1;
+}
+
+.book-button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .doctor-meta {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-actions {
+    flex-direction: column;
+  }
+  
+  .details-button,
+  .book-button {
+    width: 100%;
+  }
+} 
