@@ -20,9 +20,7 @@ function NavHeader({ theme, onToggleTheme, activeTab, onTabChange }) {
                       onClick={() => onTabChange('home')}
                   >
                       <CiHome className="nav-icon" />
-                      <span>
-                        Home
-                        </span>
+                      <span>Home</span>
                   </button>
                   <button
                       className={`nav-link ${
@@ -33,7 +31,11 @@ function NavHeader({ theme, onToggleTheme, activeTab, onTabChange }) {
                       <FaCalendarAlt className="nav-icon" />
                       <span>My Appointments</span>
                   </button>
-                  <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+                  <ThemeToggle
+                      theme={theme}
+                      onToggle={onToggleTheme}
+                      className="nav-icon"
+                  />
               </div>
           </div>
       </header>

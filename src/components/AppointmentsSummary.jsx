@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { FaCalendarAlt, FaClock, FaUserMd } from 'react-icons/fa'
-import { MdLocationOn, MdEdit, MdDelete } from 'react-icons/md'
+import { FaCalendarAlt, FaClock, FaUserMd, FaMapMarkerAlt, FaUser, FaPhoneAlt } from 'react-icons/fa'
+import { MdEdit, MdDelete } from 'react-icons/md'
+import { BsCalendarX } from 'react-icons/bs'
 import BookingModal from './BookingModal'
 import { doctors, timeSlots } from '../database/data'
 
@@ -41,7 +42,7 @@ function AppointmentsSummary({ appointments: propAppointments }) {
         <h2>No Appointments</h2>
         <p>You haven't booked any appointments yet.</p>
         <div className="empty-state-image">
-          <img src="../../public/empty.png" alt="Empty calendar" />
+          <BsCalendarX className="empty-calendar-icon" />
         </div>
       </div>
     )
@@ -74,7 +75,7 @@ function AppointmentsSummary({ appointments: propAppointments }) {
 
               <div className="appointment-details">
                 <div className="detail-item">
-                  <span className="detail-icon">📅</span>
+                  <FaCalendarAlt className="detail-icon" />
                   <div className="detail-content">
                     <span className="detail-label">Date</span>
                     <span className="detail-value">
@@ -89,7 +90,7 @@ function AppointmentsSummary({ appointments: propAppointments }) {
                 </div>
 
                 <div className="detail-item">
-                  <span className="detail-icon">⏰</span>
+                  <FaClock className="detail-icon" />
                   <div className="detail-content">
                     <span className="detail-label">Time</span>
                     <span className="detail-value">{appointment.time}</span>
@@ -97,7 +98,7 @@ function AppointmentsSummary({ appointments: propAppointments }) {
                 </div>
 
                 <div className="detail-item">
-                  <span className="detail-icon">📍</span>
+                  <FaMapMarkerAlt className="detail-icon" />
                   <div className="detail-content">
                     <span className="detail-label">Location</span>
                     <span className="detail-value">{appointment.doctorLocation}</span>
@@ -105,7 +106,7 @@ function AppointmentsSummary({ appointments: propAppointments }) {
                 </div>
 
                 <div className="detail-item">
-                  <span className="detail-icon">👤</span>
+                  <FaUser className="detail-icon" />
                   <div className="detail-content">
                     <span className="detail-label">Patient Name</span>
                     <span className="detail-value">{appointment.patientName}</span>
@@ -113,7 +114,7 @@ function AppointmentsSummary({ appointments: propAppointments }) {
                 </div>
 
                 <div className="detail-item">
-                  <span className="detail-icon">📱</span>
+                  <FaPhoneAlt className="detail-icon" />
                   <div className="detail-content">
                     <span className="detail-label">Phone</span>
                     <span className="detail-value">{appointment.phoneNumber}</span>
@@ -126,13 +127,13 @@ function AppointmentsSummary({ appointments: propAppointments }) {
                   className="reschedule-button"
                   onClick={() => handleReschedule(appointment)}
                 >
-                  Reschedule
+                  <MdEdit className="action-icon" /> Reschedule
                 </button>
                 <button
                   className="cancel-button"
                   onClick={() => handleCancel(appointment.doctorId)}
                 >
-                  Cancel
+                  <MdDelete className="action-icon" /> Cancel
                 </button>
               </div>
             </div>

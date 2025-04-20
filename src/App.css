@@ -969,7 +969,12 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  /* margin-bottom: 0.75rem; */
+      text-align: left;
+    justify-content: start;
+    align-items: self-start;
+    height: fit-content;
+    padding: 20px !important;
 }
 
 .detail-icon {
@@ -1235,4 +1240,28 @@ body {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+
+.detail-icon {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  min-width: 24px;
+}
+
+.action-icon {
+  font-size: 1.1rem;
+  margin-right: 0.5rem;
+}
+
+.empty-calendar-icon {
+  font-size: 4rem;
+  color: var(--text-secondary);
+  margin: 2rem 0;
+}
+
+.appointment-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
