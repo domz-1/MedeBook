@@ -22,6 +22,7 @@
 }
 
 .logo {
+
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -29,11 +30,13 @@
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: 600;
+
 }
 
 .logo img {
-  height: 2rem;
+  height: 3rem;
   width: auto;
+
 }
 
 .main-content {

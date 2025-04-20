@@ -41,7 +41,7 @@ function AppointmentsSummary({ appointments: propAppointments }) {
         <h2>No Appointments</h2>
         <p>You haven't booked any appointments yet.</p>
         <div className="empty-state-image">
-          <img src="/empty-calendar.svg" alt="Empty calendar" />
+          <img src="../../public/empty.png" alt="Empty calendar" />
         </div>
       </div>
     )

@@ -97,4 +97,4 @@ const DoctorDirectory = ({ onBookAppointment }) => {
   )
 }
 
-export default DoctorDirectory 
+export default DoctorDirectory

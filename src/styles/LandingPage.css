@@ -1,5 +1,5 @@
 .landing-page {
-  min-height: 100vh;
+
   display: flex;
   flex-direction: column;
 }
@@ -7,8 +7,11 @@
 .hero-section {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
   color: white;
-  padding: 4rem 2rem;
+  padding: 4rem  2rem 0 2rem;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero-content {
@@ -26,6 +29,7 @@
   font-size: 1.25rem;
   margin-bottom: 2rem;
   opacity: 0.9;
+  color: var(--primary-color);
 }
 
 .cta-button {

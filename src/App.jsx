@@ -8,8 +8,7 @@ import NavHeader from './components/NavHeader'
 function App() {
   const [theme, setTheme] = useState('light')
   const [appointments, setAppointments] = useState([])
-  const [activeTab, setActiveTab] = useState('landing')
-  const [showLanding, setShowLanding] = useState(true)
+  const [activeTab, setActiveTab] = useState('home')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -23,19 +22,8 @@ function App() {
     setAppointments(prev => [...prev, appointment])
   }
 
-  const handleGetStarted = () => {
-    setShowLanding(false)
-    setActiveTab('directory')
-  }
-
   const handleTabChange = (tab) => {
     setActiveTab(tab)
-    setShowLanding(false)
-  }
-
-  const handleHomeClick = () => {
-    setShowLanding(true)
-    setActiveTab('landing')
   }
 
   return (
@@ -45,20 +33,16 @@ function App() {
         onToggleTheme={toggleTheme}
         activeTab={activeTab}
         onTabChange={handleTabChange}
-        onHomeClick={handleHomeClick}
       />
       
       <main className="main-content">
-        {showLanding ? (
-          <LandingPage onGetStarted={handleGetStarted} />
-        ) : (
+        {activeTab === 'home' ? (
           <>
-            {activeTab === 'directory' ? (
-              <DoctorDirectory onBookAppointment={addAppointment} />
-            ) : (
-              <AppointmentsSummary appointments={appointments} />
-            )}
+            <LandingPage />
+            <DoctorDirectory onBookAppointment={addAppointment} />
           </>
+        ) : (
+          <AppointmentsSummary appointments={appointments} />
         )}
       </main>
 
