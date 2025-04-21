@@ -1,28 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { FaCalendarAlt, FaClock, FaUser, FaPhone, FaMapMarkerAlt, FaPhoneAlt, FaEdit, FaTrash } from 'react-icons/fa'
 import { BsCalendarX } from 'react-icons/bs'  // Import calendar icon instead of using image
 import BookingModal from './BookingModal'
 import { doctors, timeSlots } from '../database/data'
+import useBookingStore from '../store/bookingStore'
 
 function AppointmentsSummary() {
-  const [appointments, setAppointments] = useState(() => {
-    const saved = localStorage.getItem('appointments')
-    return saved ? JSON.parse(saved) : []
-  })
+  const { appointments, cancelAppointment, updateAppointment } = useBookingStore()
   const [showRescheduleModal, setShowRescheduleModal] = useState(false)
   const [selectedAppointment, setSelectedAppointment] = useState(null)
 
-  useEffect(() => {
-    const saved = localStorage.getItem('appointments')
-    if (saved) {
-      setAppointments(JSON.parse(saved))
-    }
-  }, []) // Load appointments when component mounts
-
   const handleCancel = (appointmentId) => {
-    const updatedAppointments = appointments.filter(app => app.doctorId !== appointmentId)
-    localStorage.setItem('appointments', JSON.stringify(updatedAppointments))
-    setAppointments(updatedAppointments)
+    cancelAppointment(appointmentId)
   }
 
   const handleReschedule = (appointment) => {
@@ -31,38 +20,38 @@ function AppointmentsSummary() {
   }
 
   const handleRescheduleConfirm = (updatedAppointment) => {
-    const updatedAppointments = appointments.map(app => 
-      app.doctorId === updatedAppointment.doctorId ? updatedAppointment : app
-    )
-    localStorage.setItem('appointments', JSON.stringify(updatedAppointments))
-    setAppointments(updatedAppointments)
+    updateAppointment(updatedAppointment.id, updatedAppointment)
     setShowRescheduleModal(false)
   }
 
   if (appointments.length === 0) {
     return (
-      <div className="appointments-empty">
+      <div className="appointments-empty" role="status" aria-live="polite">
         <h2>No Appointments</h2>
         <p>You haven't booked any appointments yet.</p>
         <div className="empty-state-icon">
-          <BsCalendarX size={64} />  {/* Use icon instead of image */}
+          <BsCalendarX size={64} aria-hidden="true" />  {/* Use icon instead of image */}
         </div>
       </div>
     )
   }
 
   return (
-    <div className="appointments-summary">
+    <div className="appointments-summary" role="main">
       <h2>Your Appointments</h2>
-      <div className="appointments-list">
+      <div className="appointments-list" role="list">
         {appointments
           .sort((a, b) => new Date(a.date) - new Date(b.date))
           .map(appointment => (
-            <div key={`${appointment.doctorId}-${appointment.date}-${appointment.time}`} className="appointment-card">
+            <div 
+              key={`${appointment.doctorId}-${appointment.date}-${appointment.time}`} 
+              className="appointment-card"
+              role="listitem"
+            >
               <div className="appointment-header">
                 <img 
                   src={appointment.doctorImage} 
-                  alt={appointment.doctorName} 
+                  alt={`${appointment.doctorName}'s profile picture`} 
                   className="appointment-doctor-image"
                 />
                 <div className="appointment-doctor-info">
@@ -70,15 +59,19 @@ function AppointmentsSummary() {
                   <p>{appointment.doctorSpecialty}</p>
                 </div>
                 <div className="appointment-status">
-                  <span className={`status-badge ${appointment.status}`}>
+                  <span 
+                    className={`status-badge ${appointment.status}`}
+                    role="status"
+                    aria-label={`Appointment status: ${appointment.status}`}
+                  >
                     {appointment.status}
                   </span>
                 </div>
               </div>
 
-              <div className="appointment-details">
-                <div className="detail-item">
-                  <FaCalendarAlt className="detail-icon" />
+              <div className="appointment-details" role="list">
+                <div className="detail-item" role="listitem">
+                  <FaCalendarAlt className="detail-icon" aria-hidden="true" />
                   <div className="detail-content">
                     <span className="detail-label">Date</span>
                     <span className="detail-value">
@@ -92,32 +85,32 @@ function AppointmentsSummary() {
                   </div>
                 </div>
 
-                <div className="detail-item">
-                  <FaClock className="detail-icon" />
+                <div className="detail-item" role="listitem">
+                  <FaClock className="detail-icon" aria-hidden="true" />
                   <div className="detail-content">
                     <span className="detail-label">Time</span>
                     <span className="detail-value">{appointment.time}</span>
                   </div>
                 </div>
 
-                <div className="detail-item">
-                  <FaMapMarkerAlt className="detail-icon" />
+                <div className="detail-item" role="listitem">
+                  <FaMapMarkerAlt className="detail-icon" aria-hidden="true" />
                   <div className="detail-content">
                     <span className="detail-label">Location</span>
                     <span className="detail-value">{appointment.doctorLocation}</span>
                   </div>
                 </div>
 
-                <div className="detail-item">
-                  <FaUser className="detail-icon" />
+                <div className="detail-item" role="listitem">
+                  <FaUser className="detail-icon" aria-hidden="true" />
                   <div className="detail-content">
                     <span className="detail-label">Patient Name</span>
                     <span className="detail-value">{appointment.patientName}</span>
                   </div>
                 </div>
 
-                <div className="detail-item">
-                  <FaPhoneAlt className="detail-icon" />
+                <div className="detail-item" role="listitem">
+                  <FaPhoneAlt className="detail-icon" aria-hidden="true" />
                   <div className="detail-content">
                     <span className="detail-label">Phone</span>
                     <span className="detail-value">{appointment.phoneNumber}</span>
@@ -129,14 +122,16 @@ function AppointmentsSummary() {
                 <button
                   className="reschedule-button"
                   onClick={() => handleReschedule(appointment)}
+                  aria-label={`Reschedule appointment with ${appointment.doctorName}`}
                 >
-                  <FaEdit className="action-icon" /> Reschedule
+                  <FaEdit className="action-icon" aria-hidden="true" /> Reschedule
                 </button>
                 <button
                   className="cancel-button"
                   onClick={() => handleCancel(appointment.doctorId)}
+                  aria-label={`Cancel appointment with ${appointment.doctorName}`}
                 >
-                  <FaTrash className="action-icon" /> Cancel
+                  <FaTrash className="action-icon" aria-hidden="true" /> Cancel
                 </button>
               </div>
             </div>

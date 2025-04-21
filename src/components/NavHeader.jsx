@@ -7,38 +7,40 @@ import Logo from '../assets/logo.png'  // Updated import path
 
 function NavHeader({ theme, onToggleTheme, activeTab, onTabChange }) {
   return (
-      <header className="nav-header">
-          <div className="nav-content">
-              <div className="logo">
-                  <img src={Logo} alt="logo-of-medebok" />
-              </div>
-              <div className="nav-links">
-                  <button
-                      className={`nav-link ${
-                          activeTab === 'home' ? 'active' : ''
-                      }`}
-                      onClick={() => onTabChange('home')}
-                  >
-                      <CiHome className="nav-icon" />
-                      <span>Home</span>
-                  </button>
-                  <button
-                      className={`nav-link ${
-                          activeTab === 'appointments' ? 'active' : ''
-                      }`}
-                      onClick={() => onTabChange('appointments')}
-                  >
-                      <FaCalendarAlt className="nav-icon" />
-                      <span>My Appointments</span>
-                  </button>
-                  <ThemeToggle
-                      theme={theme}
-                      onToggle={onToggleTheme}
-                      className="nav-icon"
-                  />
-              </div>
-          </div>
-      </header>
+    <header className="nav-header" role="banner">
+      <div className="nav-content">
+        <div className="logo">
+          <img src={Logo} alt="MedBook logo" />
+        </div>
+        <nav className="nav-links" role="navigation" aria-label="Main navigation">
+          <button
+            className={`nav-link ${activeTab === 'home' ? 'active' : ''}`}
+            onClick={() => onTabChange('home')}
+            role="tab"
+            aria-selected={activeTab === 'home'}
+            aria-controls="home-tabpanel"
+          >
+            <CiHome className="nav-icon" aria-hidden="true" />
+            <span>Home</span>
+          </button>
+          <button
+            className={`nav-link ${activeTab === 'appointments' ? 'active' : ''}`}
+            onClick={() => onTabChange('appointments')}
+            role="tab"
+            aria-selected={activeTab === 'appointments'}
+            aria-controls="appointments-tabpanel"
+          >
+            <FaCalendarAlt className="nav-icon" aria-hidden="true" />
+            <span>My Appointments</span>
+          </button>
+          <ThemeToggle
+            theme={theme}
+            onToggle={onToggleTheme}
+            className="nav-icon"
+          />
+        </nav>
+      </div>
+    </header>
   );
 }
 

@@ -8,24 +8,38 @@ const DoctorCard = ({ doctor, onBook }) => {
 
   return (
     <>
-      <div className="doctor-card">
+      <div className="doctor-card" role="article">
         <div className="doctor-image">
-          <img src={doctor.image} alt={`${doctor.name}'s profile`} />
-          <div className="availability-badge">{doctor.availability}</div>
+          <img 
+            src={doctor.image} 
+            alt={`${doctor.name}'s profile picture`} 
+          />
+          <div 
+            className="availability-badge"
+            role="status"
+            aria-label={`Availability: ${doctor.availability}`}
+          >
+            {doctor.availability}
+          </div>
         </div>
         <div className="doctor-info">
           <h3>{doctor.name}</h3>
           <p className="specialty">{doctor.specialty}</p>
-          <div className="rating">
+          <div 
+            className="rating" 
+            role="img" 
+            aria-label={`${doctor.rating} out of 5 stars`}
+          >
             {[...Array(5)].map((_, i) => (
               <FaStar 
                 key={i} 
                 className={`star ${i < doctor.rating ? 'filled' : ''}`}
+                aria-hidden="true"
               />
             ))}
           </div>
           <p className="location">
-            <MdLocationOn className="location-icon" /> {doctor.location}
+            <MdLocationOn className="location-icon" aria-hidden="true" /> {doctor.location}
           </p>
           
           <div className="card-actions">
