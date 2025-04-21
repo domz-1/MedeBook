@@ -1,55 +1,69 @@
 # Doctor Booking UI Module
 
-A responsive and accessible doctor booking interface built with React and Vite, designed to meet the requirements outlined by InVitro Capital for a front-end appointment booking UI. This project showcases a modern healthcare platform's appointment booking system with a focus on user experience, accessibility, and code quality, developed with AI-assisted tools for efficiency.
+A responsive and accessible doctor booking interface built with React and Vite, developed to meet the requirements of InVitro Capital's front-end task. This project demonstrates a modern healthcare platform's appointment booking system with a focus on user experience, accessibility, and code quality, leveraging AI tools for efficiency.
+
+## Live Demo
+
+Check out the live demo: [MedeBooking](https://medebooking.netlify.app/)
+
 
 ## Features
 
-- 🏥 **Doctor Directory**: Displays a mock list of doctors with name, photo, specialty, availability, and location, filterable by specialty.
-- 📅 **Booking Modal**: Interactive modal for selecting time slots and confirming appointments, triggered by a "Book Appointment" button.
-- 📋 **Appointments Summary**: A view to display confirmed appointments with doctor details, date/time, specialty, and location.
-- 🌓 **Light/Dark Mode**: Theme toggle for improved user experience.
-- ♿ **Accessibility**: WCAG-compliant with semantic HTML, ARIA labels, keyboard navigation, and screen reader support.
+- 🏥 **Doctor Directory**: Filterable list of doctors by specialty and availability, displaying name, photo, specialty, location, and a "Book Appointment" button.
+- 📅 **Booking Modal**: Interactive modal for selecting time slots and confirming appointments, showing doctor details.
+- 📋 **Appointments Summary**: View of booked appointments with doctor name, date, time, specialty, and location.
+- 🌓 **Light/Dark Mode**: Theme toggle for enhanced user experience.
+- ♿ **Accessibility**: WCAG-compliant with keyboard navigation, ARIA labels, and screen reader support.
 - 📱 **Responsive Design**: Optimized for mobile (<768px), tablet (768px-1024px), and desktop (>1024px).
 
 ## Technologies Used
 
-- **Frontend**: React 18, JavaScript (ES6+)
+- **Frontend**: React 18, JavaScript (ES6+), CSS3 (Custom properties for theming)
 - **Build Tool**: Vite
-- **Styling**: CSS3 (Custom properties for theming)
-- **State Management**: Local state (React hooks)
+- **State Management**: Zustand (lightweight)
+- **Icons**: react-icons
+- **Linting**: ESLint with React plugins
 - **AI Tools**:
-  - **Cursor IDE**: Used for scaffolding components, generating mock data, optimizing accessibility, and improving code quality.
-  - AI-powered code completion for faster development.
-  - Accessibility suggestions to ensure WCAG compliance.
-- **Testing/Validation**: Basic accessibility checks with Lighthouse and axe DevTools.
+  - Cursor IDE: Component scaffolding, mock data generation, accessibility optimization
+  - AI-powered code completion and suggestions
+  - Accessibility checks and improvements
+- **Dependencies**:
+  - react, react-dom
+  - zustand (state management)
+  - react-icons
+  - vite, @vitejs/plugin-react
+  - eslint, eslint-plugin-react-hooks, eslint-plugin-react-refresh
 
-## Project Requirements
+## Task Requirements
 
-This project was developed to meet the specifications provided by **Youssef Magdy** from **InVitro Capital** (email dated April 17, 2025). The task required building a front-end doctor booking UI module with the following key components:
+This project fulfills the requirements outlined by InVitro Capital (Youssef Magdy, Apr 17, 2025):
 
 1. **Doctor Directory View**:
    - Mock list of doctors with name, photo, specialty, availability, and location.
-   - Filtering by specialty.
+   - Filtering by specialty and availability.
    - "Book Appointment" button on each doctor card.
 2. **Booking Modal**:
-   - Displays doctor name and mocked available time slots.
+   - Displays doctor name and mocked time slots.
    - Allows time slot selection and confirmation.
 3. **Appointments Summary View**:
-   - Lists booked appointments with doctor name, date/time, specialty, and location.
+   - Lists booked appointments with doctor name, date, time, specialty, and location.
 4. **Technical Requirements**:
    - Built with React, JavaScript, and CSS.
-   - Local state management.
-   - No backend required; mock data used.
-   - AI tools (e.g., Cursor) used for scaffolding, accessibility, and optimization.
-5. **Accessibility Goals**:
-   - Keyboard navigable, ARIA-compliant, and responsive across devices.
-   - Passes Lighthouse/axe DevTools accessibility checks.
+   - Uses Zustand for local state management.
+   - No backend; relies on mock data.
+   - AI tools (Cursor) used for scaffolding, mock data, accessibility, and optimization.
+5. **Accessibility**:
+   - Keyboard-navigable elements.
+   - ARIA labels, roles, and descriptions.
+   - Passes Lighthouse/axe DevTools checks.
+6. **Responsive Design**:
+   - Fully responsive across mobile, tablet, and desktop.
 
 ## Getting Started
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/domz-1/MedeBook.git
    cd doctor-booking
    ```
 
@@ -63,7 +77,7 @@ This project was developed to meet the specifications provided by **Youssef Magd
    npm run dev
    ```
 
-4. Open your browser and navigate to `http://localhost:5173`.
+4. Open `http://localhost:5173` in your browser.
 
 ## Project Structure
 
@@ -109,54 +123,49 @@ This project was developed to meet the specifications provided by **Youssef Magd
 │   │   ├── 📄 base.css
 │   │   ├── 📄 index.css
 │   │   ├── 📂 modules/
-└── 📄 vite.config.js
+├── 📄 vite.config.js
 ```
 
 ## Accessibility Features
 
-- **Semantic HTML**: Ensures proper structure for screen readers.
-- **ARIA Labels/Roles**: Added for modals, buttons, and filters.
-- **Keyboard Navigation**: All interactive elements are accessible via keyboard.
-- **Focus Management**: Proper focus handling in modals and forms.
-- **Color Contrast**: Meets WCAG 2.1 AA standards.
-- **Screen Reader Support**: Tested for compatibility with tools like NVDA and VoiceOver.
+- Semantic HTML for better structure.
+- ARIA labels, roles, and `aria-describedby` for screen reader compatibility.
+- Full keyboard navigation support.
+- Focus management for modals and interactive elements.
+- High color contrast ratios (WCAG-compliant).
+- Tested with Lighthouse and axe DevTools.
 
 ## Responsive Design
 
-- **Mobile (<768px)**: Stacked layouts, touch-friendly controls.
-- **Tablet (768px-1024px)**: Grid-based doctor directory, adjusted modal sizes.
-- **Desktop (>1024px)**: Multi-column layouts, enhanced spacing.
+Optimized for:
+- **Mobile**: <768px
+- **Tablet**: 768px-1024px
+- **Desktop**: >1024px
 
 ## AI Tools Usage
 
 - **Cursor IDE**:
-  - Generated initial component scaffolding (e.g., `DoctorCard.jsx`, `BookingModal.jsx`).
-  - Created mock data in `data.js` for doctors and time slots.
-  - Provided accessibility suggestions (e.g., ARIA labels, focus management).
+  - Generated initial component structure (DoctorCard, BookingModal, etc.).
+  - Created mock data in `src/database/data.js`.
+  - Suggested accessibility improvements (ARIA labels, keyboard navigation).
   - Optimized code for performance and readability.
-- **AI Code Completion**: Accelerated development of hooks (`useAppointments.js`, `useDoctorFilters.js`).
-- **Accessibility Validation**: Used AI suggestions to ensure WCAG compliance and improve Lighthouse scores.
+- **AI Code Completion**: Assisted in writing reusable hooks (`useAppointments`, `useDoctorFilters`, `useTheme`).
+- **Accessibility Suggestions**: Ensured WCAG compliance and tested with automated tools.
 
 ## Known Limitations
 
-- **Mock Data**: Static doctor and time slot data; no real backend integration.
-- **No Persistence**: Appointments are stored in local state and lost on refresh.
-- **Basic Validation**: Minimal form validation in the booking modal.
-- **Static Time Slots**: Availability is not dynamically updated.
+- Uses mock data (`src/database/data.js`) instead of a real backend.
+- Time slots are static and not dynamically generated.
+- No persistent storage; appointments reset on page refresh.
+- Limited form validation in the booking modal.
+- No user authentication or appointment cancellation functionality.
 
-## Next Steps
 
-- [ ] Implement form validation for booking modal inputs.
-- [ ] Integrate a backend API for real data and persistence.
-- [ ] Add user authentication for personalized appointment tracking.
-- [ ] Include doctor reviews and ratings in `DoctorCard`.
-- [ ] Add appointment cancellation functionality.
-- [ ] Enable real-time availability updates for time slots.
 
 ## Contributing
 
-Contributions are welcome! Please submit issues or pull requests via the GitHub repository.
+Submit issues or enhancement requests via the GitHub repository.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Licensed under the MIT License. See the LICENSE file for details.
