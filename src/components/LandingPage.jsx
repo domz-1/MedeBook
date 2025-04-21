@@ -1,5 +1,6 @@
 import React from 'react';
 import { features, testimonials } from '../database/data';
+import DocsImage from '../assets/docs.png';  // Added import
 
 function LandingPage() {
   return (
@@ -8,15 +9,12 @@ function LandingPage() {
               <div className="hero-content">
                   <h1>Find and Book Your Doctor Online</h1>
                   <p>
-                      Doctors are one of the most important people in society.
-                      They are the sole reason our society is taking healthy and
-                      positive steps towards progress because the health of the
-                      body and mind is the reason behind the good work people
-                      put up towards development.
+                      Doctors play a vital role in society by maintaining our physical
+                      and mental wellbeing, enabling progress and development.
                   </p>
               </div>
               <div className="hero-image">
-                  <img src="../../public/docs.png" alt="Doctor with patient" />
+                  <img src={DocsImage} alt="Doctor with patient" />  {/* Updated image reference */}
               </div>
           </section>
       </div>

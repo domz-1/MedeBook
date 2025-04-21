@@ -1,30 +1,33 @@
 import React, { useState, useEffect } from 'react'
-import { FaCalendarAlt, FaClock, FaUserMd, FaMapMarkerAlt, FaUser, FaPhoneAlt } from 'react-icons/fa'
-import { MdEdit, MdDelete } from 'react-icons/md'
-import { BsCalendarX } from 'react-icons/bs'
+import { FaCalendarAlt, FaClock, FaUser, FaPhone, FaMapMarkerAlt, FaPhoneAlt, FaEdit, FaTrash } from 'react-icons/fa'
+import { BsCalendarX } from 'react-icons/bs'  // Import calendar icon instead of using image
 import BookingModal from './BookingModal'
 import { doctors, timeSlots } from '../database/data'
 
-function AppointmentsSummary({ appointments: propAppointments }) {
-  const [appointments, setAppointments] = useState([])
-  const [selectedAppointment, setSelectedAppointment] = useState(null)
+function AppointmentsSummary() {
+  const [appointments, setAppointments] = useState(() => {
+    const saved = localStorage.getItem('appointments')
+    return saved ? JSON.parse(saved) : []
+  })
   const [showRescheduleModal, setShowRescheduleModal] = useState(false)
+  const [selectedAppointment, setSelectedAppointment] = useState(null)
 
   useEffect(() => {
-    // Load appointments from localStorage
-    const savedAppointments = JSON.parse(localStorage.getItem('appointments') || '[]')
-    setAppointments(savedAppointments)
-  }, [])
-
-  const handleReschedule = (appointment) => {
-    setSelectedAppointment(appointment)
-    setShowRescheduleModal(true)
-  }
+    const saved = localStorage.getItem('appointments')
+    if (saved) {
+      setAppointments(JSON.parse(saved))
+    }
+  }, []) // Load appointments when component mounts
 
   const handleCancel = (appointmentId) => {
     const updatedAppointments = appointments.filter(app => app.doctorId !== appointmentId)
     localStorage.setItem('appointments', JSON.stringify(updatedAppointments))
     setAppointments(updatedAppointments)
+  }
+
+  const handleReschedule = (appointment) => {
+    setSelectedAppointment(appointment)
+    setShowRescheduleModal(true)
   }
 
   const handleRescheduleConfirm = (updatedAppointment) => {
@@ -41,8 +44,8 @@ function AppointmentsSummary({ appointments: propAppointments }) {
       <div className="appointments-empty">
         <h2>No Appointments</h2>
         <p>You haven't booked any appointments yet.</p>
-        <div className="empty-state-image">
-          <BsCalendarX className="empty-calendar-icon" />
+        <div className="empty-state-icon">
+          <BsCalendarX size={64} />  {/* Use icon instead of image */}
         </div>
       </div>
     )
@@ -127,13 +130,13 @@ function AppointmentsSummary({ appointments: propAppointments }) {
                   className="reschedule-button"
                   onClick={() => handleReschedule(appointment)}
                 >
-                  <MdEdit className="action-icon" /> Reschedule
+                  <FaEdit className="action-icon" /> Reschedule
                 </button>
                 <button
                   className="cancel-button"
                   onClick={() => handleCancel(appointment.doctorId)}
                 >
-                  <MdDelete className="action-icon" /> Cancel
+                  <FaTrash className="action-icon" /> Cancel
                 </button>
               </div>
             </div>
@@ -152,6 +155,12 @@ function AppointmentsSummary({ appointments: propAppointments }) {
           timeSlots={timeSlots}
           onClose={() => setShowRescheduleModal(false)}
           onConfirm={handleRescheduleConfirm}
+          initialData={{
+            date: selectedAppointment.date,
+            time: selectedAppointment.time,
+            patientName: selectedAppointment.patientName,
+            phoneNumber: selectedAppointment.phoneNumber
+          }}
         />
       )}
     </div>

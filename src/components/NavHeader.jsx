@@ -2,7 +2,7 @@ import React from 'react';
 import ThemeToggle from './ThemeToggle';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { CiHome } from 'react-icons/ci';
-import Logo from "../../public/logo.png"
+import Logo from '../assets/logo.png'  // Updated import path
 
 
 function NavHeader({ theme, onToggleTheme, activeTab, onTabChange }) {

@@ -219,6 +219,18 @@
   background: var(--bg-secondary);
   padding: 1rem;
   border-radius: 0.5rem;
+  /* box-shadow: var(--shadow-md); */
+}
+.detail-item-modal {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+  align-items: center;
+  justify-content: start;
 }
 
 .detail-label {
